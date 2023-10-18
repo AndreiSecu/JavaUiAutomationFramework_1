@@ -3,6 +3,10 @@ package com.opencart;
 import com.opencart.managers.DriverManager;
 import com.opencart.managers.RandomDataManager;
 import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 
 public class TestRunner {
     public static void main(String[] args) throws InterruptedException {
@@ -16,6 +20,7 @@ public class TestRunner {
         driver.get("https://www.andreisecuqa.host/");
 
         WebElement myAccountIcon = driver.findElement(By.xpath("//i[@class='fa-solid fa-user']"));
+
 
         myAccountIcon.click();
 
@@ -41,7 +46,7 @@ public class TestRunner {
         String randomEmail = RandomDataManager.generateRandomEmail();
         emailInput.sendKeys(randomEmail);
         System.out.println(randomEmail);
-
+   
         WebElement passwordInput = driver.findElement(By.cssSelector("#input-password"));
 
         String password = RandomDataManager.generatePassword();
@@ -61,11 +66,9 @@ public class TestRunner {
         System.out.println(driver.getTitle());
         driver.close();
 
-        driver.switchTo().window(currentWindowName);
-        driver.get("https://tekwill.md/");
         System.out.println(driver.getTitle());
+        driver.close();
         driver.quit();
-
         System.out.println("The execution is over");
     }
 }

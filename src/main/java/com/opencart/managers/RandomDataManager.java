@@ -31,8 +31,4 @@ public class RandomDataManager {
         return fakerObject.internet().password();
     }
 
-    public static String getRandomAddress(){
-        return fakerObject.address().fullAddress();
-    }
-
 }
