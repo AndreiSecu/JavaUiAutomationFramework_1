@@ -2,6 +2,7 @@ package com.opencart;
 
 import com.opencart.managers.DriverManager;
 import com.opencart.managers.RandomDataManager;
+import org.openqa.selenium.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +16,11 @@ public class TestRunner {
 
         // New Window Code
         driver.switchTo().newWindow(WindowType.TAB);
-        driver.get("https://opencart.antropy.co.uk/");
 
-        WebElement myAccountIcon = driver.findElement(By.xpath("//i[@class='fa fa-user']"));
+        driver.get("https://www.andreisecuqa.host/");
+
+        WebElement myAccountIcon = driver.findElement(By.xpath("//i[@class='fa-solid fa-user']"));
+
 
         myAccountIcon.click();
 
@@ -43,25 +46,25 @@ public class TestRunner {
         String randomEmail = RandomDataManager.generateRandomEmail();
         emailInput.sendKeys(randomEmail);
         System.out.println(randomEmail);
-
-        WebElement phoneInput = driver.findElement(By.cssSelector("#input-telephone"));
-        phoneInput.sendKeys(RandomDataManager.generatePhoneNumber());
-
+   
         WebElement passwordInput = driver.findElement(By.cssSelector("#input-password"));
 
         String password = RandomDataManager.generatePassword();
         passwordInput.sendKeys(password);
-
-        WebElement confirmPasswordInput = driver.findElement(By.cssSelector("#input-confirm"));
-
-        confirmPasswordInput.sendKeys(password);
         System.out.println(password);
 
-        WebElement termsAndConditionCheckbox = driver.findElement(By.xpath("//input[@name='agree']"));
-        termsAndConditionCheckbox.click();
 
-        WebElement registerBtn = driver.findElement(By.xpath("//input[@value='Continue']"));
+        WebElement termsAndConditionToggleBar = driver.findElement(By.cssSelector("input[value='1'][name='agree']"));
+        JavascriptExecutor je = (JavascriptExecutor) driver;
+        je.executeScript("arguments[0].scrollIntoView(true);", termsAndConditionToggleBar);
+        Thread.sleep(1000);
+        termsAndConditionToggleBar.click();
+
+        WebElement registerBtn = driver.findElement(By.cssSelector("button[type='submit']"));
         registerBtn.click();
+
+        System.out.println(driver.getTitle());
+        driver.close();
 
         System.out.println(driver.getTitle());
         driver.close();
